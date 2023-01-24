@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./styles.css"
 export function RecyclingList({ items }) {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [quantityByType, setQuantityByType] = useState({});
@@ -20,14 +20,8 @@ export function RecyclingList({ items }) {
   }, [items]);
 
   return (
-    <div>
-      <h2>Total Quantity: {totalQuantity}</h2>
-      {Object.entries(quantityByType).map(([type, quantity]) => (
-        <h2 key={type}>
-          {type} Quantity: {quantity}
-        </h2>
-      ))}
-      <table>
+    <div className="RecyclingList">
+           <table>
         <thead>
           <tr>
             <th>Type</th>
@@ -45,6 +39,12 @@ export function RecyclingList({ items }) {
           ))}
         </tbody>
       </table>
+       <h2>Your recycling score: {totalQuantity}</h2>
+      {Object.entries(quantityByType).map(([type, quantity]) => (
+        <h2 key={type}>
+          {type} recycled: {quantity}
+        </h2>
+      ))}
     </div>
   );
 }

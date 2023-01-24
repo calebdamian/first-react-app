@@ -1,34 +1,34 @@
 import React, { useState } from "react";
-
+import "./styles.css"
 export function AddRecycling({ onAddRecycling }) {
   const [item, setItem] = useState({
     type: "",
-    quantity: "",
+    quantity:0,
     date: "",
   });
 
   const [score, setScore] = useState(0);
 
-  function handleInputChange(event) {
+function handleInputChange(event) {
     const { name, value } = event.target;
-    console.log(...item);
     setItem({ ...item, [name]: value });
-    const quantityAdded = item.quantity;
-    setScore(score + quantityAdded);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    onAddRecycling(item, score);
+    if (name === 'quantity') {
+        setScore(score + Number(value));
+    }
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  //item.quantity = Number(item.quantity);
+    onAddRecycling({...item, quantity:Number(item.quantity)});
     setItem({
-      type: "",
-      quantity: "",
-      date: "",
+        type: "",
+        quantity: 0,
+        date: "",
     });
-  }
+}
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="add-form">
       <label>
         Type:
         <select
@@ -37,13 +37,19 @@ export function AddRecycling({ onAddRecycling }) {
           onChange={handleInputChange}
           required
         >
-          <option selected>Select a recycle type</option>
+          <option>Select a recycle type</option>
 
           <option>Plastic</option>
 
           <option>Metal</option>
 
           <option>Hazardous waste</option>
+          
+          <option>Wood</option>
+          
+          <option>Glass</option>
+          
+          <option>Textile</option>
         </select>
       </label>
       <label>
@@ -66,7 +72,7 @@ export function AddRecycling({ onAddRecycling }) {
           required
         />
       </label>
-      <button type="submit">Add Recycling</button>
+      <button type="submit" className="button-3">Add Recycling</button>
     </form>
   );
 }
