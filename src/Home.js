@@ -12,9 +12,10 @@ export function Home() {
 
   return (
     <div>
-      <h1>Recycling game - Caleb Naranjo</h1>
+      <h1>Recycling app</h1>
       <AddRecycling onAddRecycling={handleAddRecycling} />
       <RecyclingList items={recyclingItems} />
+      <h5>Created by: Caleb Naranjo</h5>
     </div>
   );
 }
